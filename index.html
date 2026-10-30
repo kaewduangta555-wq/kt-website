@@ -302,7 +302,7 @@ html[lang^="zh"] .hero h1{max-width:14em}
 <div aria-label="Language" class="lang" role="group"><button data-lang="th" type="button">TH</button><button data-lang="en" type="button">EN</button><button data-lang="zh" type="button">中文</button></div><button aria-controls="nav" aria-expanded="false" class="menu-btn">เมนู</button>
 <nav class="links" id="nav">
 <a href="#services">บริการ</a>
-<a href="#works">ผลงาน</a>
+<a hidden="" href="#works">ผลงาน</a>
 <a href="#about">เกี่ยวกับเรา</a>
 <a href="#faq">คำถามที่พบบ่อย</a>
 <a href="#contact">ติดต่อเรา</a>
@@ -426,7 +426,8 @@ html[lang^="zh"] .hero h1{max-width:14em}
 <div class="svc-more"><b>งานอื่น ๆ</b><span>ระบบแก๊ส</span><span>ซ่อมแซมและบำรุงรักษาอาคาร</span><span>งานติดตั้งตามความต้องการของลูกค้า</span></div>
 </div>
 </section>
-<section class="block alt" id="works">
+<!-- ซ่อนไว้ก่อนจนกว่าจะมีรูปผลงานจริง ลบ hidden ออกเพื่อแสดง (และเปิดลิงก์ผลงานในเมนูด้วย) -->
+<section class="block alt" hidden="" id="works">
 <div class="wrap">
 <h2>ผลงานที่ผ่านมา</h2>
 <p class="lede">ตัวอย่างงานก่อนและหลังดำเนินการ</p>
@@ -442,7 +443,8 @@ html[lang^="zh"] .hero h1{max-width:14em}
 </div>
 </div>
 </section>
-<section class="block" id="process">
+<!-- ตอนซ่อนผลงานกับใบรับรอง สลับสีพื้น process เป็น alt และ about เป็นสีปกติ ให้ยังสลับสีกันอยู่ ถ้าเปิดสองส่วนนั้นกลับมา ให้สลับคืน -->
+<section class="block alt" id="process">
 <div class="wrap">
 <h2>ขั้นตอนการทำงาน</h2>
 <ol class="steps">
@@ -454,7 +456,7 @@ html[lang^="zh"] .hero h1{max-width:14em}
 </ol>
 </div>
 </section>
-<section class="block alt" id="about">
+<section class="block" id="about">
 <div class="wrap about">
 <div>
 <h2>เกี่ยวกับเรา<span class="en">About Us</span></h2>
@@ -479,7 +481,8 @@ html[lang^="zh"] .hero h1{max-width:14em}
 <p class="belief">งานที่ดีไม่ได้จบแค่ติดตั้งหรือก่อสร้างเสร็จ แต่ต้องใช้งานได้จริง เหมาะกับหน้างาน และสร้างความมั่นใจให้ลูกค้าในระยะยาว</p>
 </div>
 </section>
-<section class="block" id="certs">
+<!-- ซ่อนไว้ก่อนจนกว่าจะมีรายละเอียดใบรับรองจริง ลบ hidden ออกเพื่อแสดง -->
+<section class="block" hidden="" id="certs">
 <div class="wrap">
 <h2>ใบรับรองและคุณสมบัติทีมงาน</h2>
 <p class="lede">ทีมงานมีใบอนุญาตและผ่านการฝึกอบรมในสาขาที่เกี่ยวข้องกับงาน</p>
