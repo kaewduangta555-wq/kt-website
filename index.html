@@ -412,6 +412,11 @@ html[lang^="zh"] .hero h1{max-width:14em}
   .bot-fab{bottom:calc(78px + env(safe-area-inset-bottom,0px));right:14px;width:54px;height:54px}
   .bot{right:16px;left:16px;width:auto;bottom:calc(142px + env(safe-area-inset-bottom,0px));height:min(520px,calc(100vh - 220px))}
 }
+.consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:47;max-width:560px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:14px 16px;border-radius:16px;background:var(--night);color:var(--on-night);box-shadow:var(--shadow-lg)}
+.consent p{margin:0;flex:1 1 240px;font-size:14.5px;line-height:1.5}
+.consent div{display:flex;gap:8px}
+.consent .btn{padding:9px 16px;font-size:14.5px}
+@media (max-width:700px){.consent{bottom:calc(76px + env(safe-area-inset-bottom,0px))}}
 </style>
 <link href="/favicon.ico" rel="icon" sizes="32x32"/>
 <link href="/favicon-32.png" rel="icon" type="image/png" sizes="32x32"/>
@@ -793,6 +798,44 @@ setLang(["th","en","zh"].includes(hl) ? hl : (saved || "th"));
   });
 })();
 
+// วัดผล Google Analytics 4: นับการกดโทร / LINE / อีเมล / รีวิว / ส่งแบบฟอร์ม / เปิดแชตบอต
+// ใส่รหัส G-XXXXXXX ใน GA_ID เพื่อเปิดใช้ ถ้าเว้นว่างจะไม่โหลดอะไรเลย
+const GA_ID = "G-WD7MRXY8XR";
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+function track(name, params){ if (GA_ID) gtag("event", name, params || {}); }
+(function(){
+  if (!GA_ID) return;
+  let choice = null; try { choice = localStorage.getItem("kt-consent"); } catch {}
+  // ค่าเริ่มต้นไม่เก็บคุกกี้จนกว่าผู้ใช้จะกดยอมรับ (PDPA)
+  gtag("consent", "default", {analytics_storage: choice === "yes" ? "granted" : "denied", ad_storage: choice === "yes" ? "granted" : "denied",
+    ad_user_data: choice === "yes" ? "granted" : "denied", ad_personalization: "denied"});
+  gtag("js", new Date()); gtag("config", GA_ID);
+  const s = document.createElement("script"); s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID; document.head.append(s);
+  if (choice) return;
+  const T = {
+    th: ["เว็บไซต์นี้ใช้คุกกี้เพื่อวัดผลการใช้งานและปรับปรุงบริการ", "ยอมรับ", "ไม่ยอมรับ"],
+    en: ["This site uses cookies to measure usage and improve our service.", "Accept", "Decline"],
+    zh: ["本网站使用 Cookie 来统计访问并改进服务。", "接受", "拒绝"]
+  }[LANG] || ["", "", ""];
+  document.body.insertAdjacentHTML("beforeend", '<div class="consent" role="region" aria-label="cookies"><p>' + T[0] + '</p><div><button class="btn btn-y" data-c="yes" type="button">' + T[1] + '</button><button class="btn btn-o" data-c="no" type="button">' + T[2] + "</button></div></div>");
+  const bar = document.querySelector(".consent");
+  bar.addEventListener("click", e => {
+    const c = e.target.closest("button")?.dataset.c; if (!c) return;
+    try { localStorage.setItem("kt-consent", c); } catch {}
+    if (c === "yes") gtag("consent", "update", {analytics_storage: "granted", ad_storage: "granted", ad_user_data: "granted"});
+    bar.remove();
+  });
+})();
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[href]"); if (!a) return;
+  const h = a.getAttribute("href"), where = a.closest(".bot") ? "chatbot" : a.closest(".callbar") ? "callbar" : a.closest("header") ? "header" : a.closest("footer") ? "footer" : "page";
+  if (h.startsWith("tel:")) track("click_call", {where});
+  else if (h.includes("line.me")) track("click_line", {where});
+  else if (h.startsWith("mailto:")) track("click_email", {where});
+  else if (h.includes("/review")) track("click_review", {where});
+});
+
 const LINE_URL = "https://line.me/R/ti/p/@939plhhq";
 const EMAIL = "kaewduangta555@gmail.com";
 document.getElementById("yr").textContent = new Date().getFullYear();
@@ -812,6 +855,7 @@ function buildText(){
 form.addEventListener("submit", async e => {
   e.preventDefault();
   const t = buildText(); if (!t) return;
+  track("generate_lead", {method: "line", job_type: form.type.value});
   // เริ่มคัดลอกและเปิด LINE ทันทีตอนกด ถ้ารอให้คัดลอกเสร็จก่อน Safari บน iPhone จะบล็อกหน้าต่างใหม่
   const copying = navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject();
   window.open(LINE_URL, "_blank", "noopener");
@@ -821,6 +865,7 @@ form.addEventListener("submit", async e => {
 });
 document.getElementById("by-mail").addEventListener("click", () => {
   const t = buildText(); if (!t) return;
+  track("generate_lead", {method: "email", job_type: form.type.value});
   // เปิดแอปอีเมลในหน้าเดิม ถ้าใช้หน้าต่างใหม่ บางเบราว์เซอร์จะทิ้งแท็บว่างไว้
   location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("ขอใบเสนอราคา") + "&body=" + encodeURIComponent(t);
   show(tr("__mail"));
@@ -987,7 +1032,7 @@ document.getElementById("by-mail").addEventListener("click", () => {
     box.hidden = !open; fab.setAttribute("aria-expanded", open);
     if (open) {
       if (shownLang !== L()) paint();
-      if (!started) { started = true; say(UI[L()].hi, "b"); }
+      if (!started) { started = true; say(UI[L()].hi, "b"); track("chat_open"); }
       if (matchMedia("(min-width:701px)").matches) inp.focus();
     } else fab.focus();
   }
