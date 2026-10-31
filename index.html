@@ -380,6 +380,38 @@ html[lang^="zh"] .hero h1{max-width:14em}
   .rv.in{opacity:1;animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
   @keyframes rise{from{opacity:0;transform:translateY(20px)}}
 }
+/* แชตบอตผู้ช่วย ตอบคำถามที่พบบ่อยในเครื่อง ไม่ส่งข้อมูลออกไปไหน */
+.bot-fab{position:fixed;right:20px;bottom:20px;z-index:45;width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--blue),var(--c-solar));box-shadow:0 14px 30px -10px rgba(0,106,167,.7);transition:transform .2s}
+.bot-fab:hover{transform:scale(1.06)}
+.bot-fab svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bot-fab .dot{position:absolute;top:6px;right:6px;width:13px;height:13px;border-radius:50%;background:var(--c-fire);border:2px solid #fff}
+.bot-fab[aria-expanded="true"] .dot{display:none}
+.bot{position:fixed;right:20px;bottom:92px;z-index:46;width:min(380px,calc(100vw - 32px));height:min(560px,calc(100vh - 120px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg);overflow:hidden}
+.bot[hidden]{display:none}
+.bot-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--night);color:var(--on-night)}
+.bot-head img{width:34px;height:auto;background:#fff;border-radius:10px;padding:3px}
+.bot-head b{display:block;font:600 16px var(--display)}
+.bot-head small{color:var(--on-night-muted);font-size:12.5px}
+.bot-head small::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c-green);margin-right:6px}
+.bot-x{margin-left:auto;background:none;border:0;color:var(--on-night);font-size:26px;line-height:1;cursor:pointer;padding:2px 6px;border-radius:8px}
+.bot-log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--surface-2)}
+.bot-msg{max-width:86%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.55;white-space:pre-line}
+.bot-msg.b{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:6px}
+.bot-msg.u{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:6px}
+.bot-acts{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:92%}
+.bot-acts a{font:600 13.5px var(--body);text-decoration:none;padding:8px 12px;border-radius:999px;background:var(--yellow);color:var(--yellow-ink)}
+.bot-acts a.line{background:#06C755;color:#fff}
+.bot-chips{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;border-top:1px solid var(--line);background:var(--surface);scrollbar-width:none}
+.bot-chips button{flex:none;font:500 13.5px var(--body);padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);cursor:pointer}
+.bot-chips button:hover{border-color:var(--blue);color:var(--blue-text)}
+.bot-in{display:flex;gap:8px;padding:10px 12px 12px;background:var(--surface)}
+.bot-in input{flex:1;min-width:0;font:400 15px var(--body);padding:11px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink)}
+.bot-in button{flex:none;width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;background:var(--blue);color:#fff;display:grid;place-items:center}
+.bot-in button svg{width:20px;height:20px;fill:currentColor}
+@media (max-width:700px){
+  .bot-fab{bottom:calc(78px + env(safe-area-inset-bottom,0px));right:14px;width:54px;height:54px}
+  .bot{right:16px;left:16px;width:auto;bottom:calc(142px + env(safe-area-inset-bottom,0px));height:min(520px,calc(100vh - 220px))}
+}
 </style>
 <link href="/favicon.ico" rel="icon" sizes="32x32"/>
 <link href="/favicon-32.png" rel="icon" type="image/png" sizes="32x32"/>
@@ -669,7 +701,7 @@ html[lang^="zh"] .hero h1{max-width:14em}
 <div class="channels">
 <a class="channel" href="tel:0897423332"><span class="ico"><svg viewbox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg></span><div><b>โทรศัพท์</b><span>089-742-3332</span></div></a>
 <a class="channel" href="tel:0626699544"><span class="ico"><svg viewbox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg></span><div><b>โทรศัพท์</b><span>062-669-9544</span></div></a>
-<a class="channel" href="https://line.me/ti/p/~tonaortawan" rel="noopener" target="_blank"><span class="ico"><svg viewbox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.6-.8L3 21l1.9-5.1A8.4 8.4 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5z"></path></svg></span><div><b>LINE ID</b><span>tonaortawan</span></div></a>
+<a class="channel" href="https://line.me/R/ti/p/@939plhhq" rel="noopener" target="_blank"><span class="ico"><svg viewbox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.6-.8L3 21l1.9-5.1A8.4 8.4 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5z"></path></svg></span><div><b>LINE ID</b><span>@939plhhq</span></div></a>
 <a class="channel" href="mailto:kaewduangta555@gmail.com"><span class="ico"><svg viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg></span><div><b>อีเมล</b><span>kaewduangta555@gmail.com</span></div></a>
 <a class="channel" href="https://g.page/r/CQVI4UuljhANEBM" rel="noopener" target="_blank"><span class="ico"><svg viewbox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><div><b>ที่อยู่ (เปิดแผนที่)</b><span>48/402 หมู่ที่ 6 ถนนพุทธมณฑลสาย 4 ตำบลกระทุ่มล้ม อำเภอสามพราน จังหวัดนครปฐม 73220</span></div></a>
 <a class="channel" href="https://g.page/r/CQVI4UuljhANEBM/review" rel="noopener" target="_blank"><span class="ico"><svg viewbox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"></path></svg></span><div><b>รีวิวเราบน Google</b><span>ให้คะแนนและเขียนรีวิว</span></div></a>
@@ -704,12 +736,12 @@ html[lang^="zh"] .hero h1{max-width:14em}
 <div class="wrap">
 <div><strong>บริษัท เกษรถาวร จำกัด</strong><p>KESORNTHAWORN CO., LTD.</p><p>เลขทะเบียนนิติบุคคล 0735563005252</p></div>
 <div><p>48/402 หมู่ที่ 6 ถนนพุทธมณฑลสาย 4 ตำบลกระทุ่มล้ม อำเภอสามพราน จังหวัดนครปฐม 73220</p></div>
-<div><p>โทร 089-742-3332, 062-669-9544</p><p>LINE: tonaortawan</p><p><a href="https://g.page/r/CQVI4UuljhANEBM/review" rel="noopener" target="_blank">รีวิวเราบน Google</a></p><p>kesornthaworn.com</p><p>© <span id="yr"></span> เกษรถาวร</p></div>
+<div><p>โทร 089-742-3332, 062-669-9544</p><p>LINE: @939plhhq</p><p><a href="https://g.page/r/CQVI4UuljhANEBM/review" rel="noopener" target="_blank">รีวิวเราบน Google</a></p><p>kesornthaworn.com</p><p>© <span id="yr"></span> เกษรถาวร</p></div>
 </div>
 </footer>
 <div class="callbar">
 <a class="btn btn-o" href="tel:0897423332">โทร</a>
-<a class="btn btn-o" href="https://line.me/ti/p/~tonaortawan" rel="noopener" target="_blank">LINE</a>
+<a class="btn btn-o" href="https://line.me/R/ti/p/@939plhhq" rel="noopener" target="_blank">LINE</a>
 <a class="btn btn-y" href="#contact">ขอราคา</a>
 </div>
 <script>
@@ -761,7 +793,7 @@ setLang(["th","en","zh"].includes(hl) ? hl : (saved || "th"));
   });
 })();
 
-const LINE_URL = "https://line.me/ti/p/~tonaortawan";
+const LINE_URL = "https://line.me/R/ti/p/@939plhhq";
 const EMAIL = "kaewduangta555@gmail.com";
 document.getElementById("yr").textContent = new Date().getFullYear();
 
@@ -793,6 +825,184 @@ document.getElementById("by-mail").addEventListener("click", () => {
   location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("ขอใบเสนอราคา") + "&body=" + encodeURIComponent(t);
   show(tr("__mail"));
 });
+
+// แชตบอตผู้ช่วย: จับคำในคำถามกับหัวข้อด้านล่าง แล้วตอบพร้อมปุ่มโทร / LINE / แบบฟอร์ม
+(function(){
+  const REVIEW = "https://g.page/r/CQVI4UuljhANEBM/review";
+  const A = {
+    tel: {href: "tel:0897423332", th: "📞 โทร 089-742-3332", en: "📞 Call 089-742-3332", zh: "📞 致电 089-742-3332"},
+    line: {href: LINE_URL, cls: "line", th: "💬 ทัก LINE", en: "💬 Chat on LINE", zh: "💬 LINE 联系"},
+    form: {href: "#contact", th: "📝 ขอใบเสนอราคา", en: "📝 Request a quote", zh: "📝 索取报价"},
+    svc: {href: "#services", th: "ดูบริการทั้งหมด", en: "See all services", zh: "查看全部服务"},
+    area: {href: "#area", th: "ดูพื้นที่ให้บริการ", en: "See service area", zh: "查看服务区域"},
+    map: {href: "https://g.page/r/CQVI4UuljhANEBM", th: "📍 เปิดแผนที่", en: "📍 Open map", zh: "📍 打开地图"},
+    review: {href: REVIEW, th: "⭐ เขียนรีวิว", en: "⭐ Write a review", zh: "⭐ 写评价"}
+  };
+  const UI = {
+    th: {name: "ผู้ช่วยเกษรถาวร", status: "ตอบทันที · โทรคุยกับทีมงานได้", ph: "พิมพ์คำถาม เช่น ติดโซลาร์ราคาเท่าไร", open: "เปิดแชตผู้ช่วย", close: "ปิดแชต", send: "ส่ง",
+      hi: "สวัสดีครับ 👋 ผู้ช่วยของบริษัท เกษรถาวร จำกัด\nสอบถามเรื่องงานไฟฟ้า โซลาร์เซลล์ Fire Alarm หรืองานก่อสร้างได้เลยครับ เลือกหัวข้อด้านล่าง หรือพิมพ์คำถามมาก็ได้"},
+    en: {name: "Kesornthaworn Assistant", status: "Instant answers · talk to our team anytime", ph: "Ask a question, e.g. solar price", open: "Open chat assistant", close: "Close chat", send: "Send",
+      hi: "Hello 👋 I'm the Kesornthaworn Co., Ltd. assistant.\nAsk about electrical work, solar, fire alarm or construction. Pick a topic below or type your question."},
+    zh: {name: "凯森塔瓦助手", status: "即时回复 · 可随时联系团队", ph: "输入问题，例如：太阳能多少钱", open: "打开聊天助手", close: "关闭聊天", send: "发送",
+      hi: "您好 👋 我是凯森塔瓦有限公司的助手。\n可咨询电气、太阳能、火灾报警或建筑工程。请选择下方话题或直接输入问题。"}
+  };
+  // k = คำที่ใช้จับ (คำยาวได้คะแนนมากกว่า เช่น "ไฟไหม้" ชนะ "ไฟ"), chip = ปุ่มลัด
+  const T = [
+    {id: "svc", k: ["บริการ", "ทำอะไร", "รับงานอะไร", "รับทำ", "service", "服务"],
+      chip: {th: "บริการมีอะไรบ้าง", en: "What services?", zh: "有哪些服务"},
+      th: "เรารับงาน 4 กลุ่มหลักครับ\n⚡ งานระบบไฟฟ้า ตู้ MDB/DB เดินสาย แสงสว่าง สายดิน\n☀️ โซลาร์เซลล์ On-Grid / Hybrid\n🔥 Fire Alarm และระบบดับเพลิง\n🏠 รับเหมาก่อสร้าง สร้างบ้าน ต่อเติม รีโนเวท\nนอกจากนี้มีระบบแก๊ส และงานซ่อมบำรุงอาคาร รับทั้งบ้าน ร้านค้า สำนักงาน และโรงงาน",
+      en: "We cover 4 main areas:\n⚡ Electrical systems: MDB/DB panels, wiring, lighting, grounding\n☀️ Solar: On-Grid / Hybrid\n🔥 Fire alarm and fire protection\n🏠 Construction, house building, extensions, renovation\nAlso gas systems and building maintenance, for homes, shops, offices and factories.",
+      zh: "我们提供四大类服务：\n⚡ 电气系统：MDB/DB 配电柜、布线、照明、接地\n☀️ 太阳能：并网 / 混合系统\n🔥 火灾报警与消防系统\n🏠 建筑承包、建房、扩建、翻新\n另有燃气系统和建筑维护，住宅、商铺、办公室、工厂均可。",
+      a: ["svc", "form"]},
+    {id: "price", k: ["ราคา", "เท่าไร", "เท่าไหร่", "ค่าใช้จ่าย", "ใบเสนอราคา", "ประเมิน", "งบ", "price", "cost", "quote", "价格", "多少钱", "报价"],
+      chip: {th: "ขอใบเสนอราคา", en: "Get a quote", zh: "索取报价"},
+      th: "ราคาขึ้นกับขนาดและลักษณะหน้างานครับ เราจะประเมินหน้างานก่อน แล้วออกใบเสนอราคาแยกรายการพร้อมระยะเวลา\nส่งรายละเอียดงาน สถานที่ และรูปหน้างาน (ถ้ามี) ทาง LINE หรือกรอกแบบฟอร์มได้เลยครับ",
+      en: "Pricing depends on the size and site conditions. We assess the site first, then send an itemised quotation with a timeline.\nSend the job details, location and site photos (if any) via LINE, or use the quote form.",
+      zh: "价格取决于工程规模和现场情况。我们会先勘察现场，再提供分项报价和工期。\n请通过 LINE 发送工程详情、地点和现场照片（如有），或填写报价表单。",
+      a: ["line", "form", "tel"]},
+    {id: "solar", k: ["โซลาร์", "โซล่า", "แผง", "ค่าไฟ", "คุ้ม", "คืนทุน", "solar", "pv", "太阳能", "光伏"],
+      chip: {th: "ติดโซลาร์คุ้มไหม", en: "Is solar worth it?", zh: "装太阳能划算吗"},
+      th: "ขึ้นกับค่าไฟต่อเดือนและช่วงเวลาที่ใช้ไฟครับ ถ้าใช้ไฟกลางวันเยอะ เช่น โรงงาน ร้านค้า หรือบ้านที่เปิดแอร์กลางวัน มักคุ้มเร็ว\nส่งรูปบิลค่าไฟย้อนหลัง 3–6 เดือนมาทาง LINE เราจะประเมินขนาดระบบและระยะเวลาคืนทุนให้ก่อนตัดสินใจ ไม่มีค่าใช้จ่าย",
+      en: "It depends on your monthly bill and when you use power. High daytime use (factories, shops, homes with daytime AC) usually pays back fastest.\nSend photos of 3–6 months of electricity bills via LINE and we'll size the system and estimate the payback, free of charge.",
+      zh: "取决于每月电费和用电时段。白天用电多（工厂、商铺、白天开空调的住宅）通常回本最快。\n请通过 LINE 发送近 3–6 个月电费单照片，我们免费评估系统容量和回本时间。",
+      a: ["line", "tel"]},
+    {id: "elec", k: ["ไฟฟ้า", "ตู้ไฟ", "ตู้ mdb", "mdb", "เดินสาย", "สายไฟ", "เบรกเกอร์", "ไฟดับ", "ไฟตก", "สายดิน", "ปลั๊ก", "electric", "wiring", "电气", "电工", "配电"],
+      chip: {th: "งานระบบไฟฟ้า", en: "Electrical work", zh: "电气工程"},
+      th: "งานไฟฟ้ารับครบครับ ตั้งแต่ตู้ MDB / DB เดินท่อ เดินสาย ระบบแสงสว่าง ระบบสายดิน ไฟฉุกเฉิน ไปจนถึงซ่อมและปรับปรุงระบบเดิม เลือกขนาดสายและเบรกเกอร์ให้เหมาะกับการใช้งานจริง ทั้งบ้าน อาคาร และโรงงาน",
+      en: "We handle complete electrical work: MDB/DB panels, conduit and wiring, lighting, grounding, emergency lights, plus repairs and upgrades, sized correctly for real loads in homes, buildings and factories.",
+      zh: "提供全套电气工程：MDB/DB 配电柜、穿管布线、照明、接地、应急照明，以及旧系统维修改造，按实际负载选择线径和断路器，适用于住宅、楼宇和工厂。",
+      a: ["form", "tel"]},
+    {id: "fire", k: ["ไฟไหม้", "เพลิง", "ดับเพลิง", "fire", "alarm", "สัญญาณเตือน", "หัวตรวจจับ", "ควัน", "ตรวจอาคาร", "消防", "火灾", "报警"],
+      chip: {th: "Fire Alarm / ดับเพลิง", en: "Fire alarm", zh: "火灾报警"},
+      th: "เรารับติดตั้ง ทดสอบ และบำรุงรักษาระบบแจ้งเหตุเพลิงไหม้ (Fire Alarm) หัวตรวจจับควันและความร้อน ระบบดับเพลิง ตู้สายฉีดดับเพลิง และตรวจเช็กประจำปี พร้อมรายงานผลสำหรับการตรวจสอบอาคารครับ",
+      en: "We install, test and maintain fire alarm systems, smoke and heat detectors, fire protection and hose cabinets, with annual inspections and reports for building inspections.",
+      zh: "我们提供火灾报警系统、烟感温感探测器、消防系统和消防栓箱的安装、测试与维护，以及年度检查并出具建筑检查报告。",
+      a: ["form", "tel"]},
+    {id: "build", k: ["ก่อสร้าง", "สร้างบ้าน", "ต่อเติม", "รีโนเวท", "ปรับปรุง", "ซ่อมบ้าน", "หลังคา", "อาคาร", "build", "construct", "renovat", "建筑", "建房", "装修", "翻新"],
+      chip: {th: "ก่อสร้าง / ต่อเติม", en: "Construction", zh: "建筑 / 扩建"},
+      th: "รับเหมาก่อสร้างอาคารพาณิชย์ อาคารพักอาศัย สถานที่ทำการ รับสร้างบ้าน งานโครงสร้าง ต่อเติมบ้าน และรีโนเวทสำนักงาน ร้านค้าครับ งานเดียวจบ เพราะเราทำระบบไฟฟ้าให้ในงานเดียวกันได้ด้วย",
+      en: "We build commercial and residential buildings, houses and structures, and do home extensions and office/shop renovations, including the electrical work in the same job.",
+      zh: "承包商业和住宅建筑、建房、结构工程、房屋扩建及办公室和商铺翻新，电气工程可一并完成。",
+      a: ["form", "tel"]},
+    {id: "area", k: ["จังหวัด", "ต่างจังหวัด", "พื้นที่", "ที่ไหน", "ไกล", "นิคม", "โรงงาน", "เชียงใหม่", "ขอนแก่น", "สงขลา", "ชลบุรี", "ระยอง", "area", "province", "where", "地区", "外府", "工业区"],
+      chip: {th: "รับงานต่างจังหวัดไหม", en: "Do you work upcountry?", zh: "接外府工程吗"},
+      th: "รับงานทั่วประเทศครับ เน้นภาคกลาง กรุงเทพฯ ปริมณฑล และเขตนิคมอุตสาหกรรม เช่น อมตะ แหลมฉบัง โรจนะ เวลโกรว์ เคยเข้าหน้างานไกลถึงเชียงใหม่ ขอนแก่น และสงขลา\nส่งตำแหน่งหน้างานมาทาง LINE เพื่อวางแผนการเดินทางได้เลยครับ",
+      en: "We work nationwide, focusing on Central Thailand, Bangkok and industrial estates such as Amata, Laem Chabang, Rojana and Wellgrow. We've worked as far as Chiang Mai, Khon Kaen and Songkhla.\nSend the site location via LINE so we can plan the trip.",
+      zh: "我们承接全国工程，重点为中部、曼谷及周边和工业区，如安美德、林查班、罗加纳、Wellgrow，曾远至清迈、孔敬和宋卡。\n请通过 LINE 发送工地位置以便安排行程。",
+      a: ["area", "line"]},
+    {id: "time", k: ["นานไหม", "นานเท่าไร", "ระยะเวลา", "กี่วัน", "เสร็จเมื่อไร", "เริ่มได้", "how long", "time", "工期", "多久"],
+      chip: {th: "ใช้เวลานานไหม", en: "How long?", zh: "需要多久"},
+      th: "ขึ้นกับขนาดและประเภทงานครับ ระยะเวลาจะระบุไว้ในแผนงานพร้อมใบเสนอราคา ระหว่างทำงานเราแจ้งความคืบหน้าพร้อมรูปถ่ายเป็นระยะ",
+      en: "It depends on the size and type of job. The timeline is stated in the work plan with the quotation, and we send progress updates with photos along the way.",
+      zh: "取决于工程规模和类型。工期会在报价附带的工作计划中注明，施工期间会定期发送进度和照片。",
+      a: ["form"]},
+    {id: "warranty", k: ["ประกัน", "รับประกัน", "warranty", "guarantee", "保修"],
+      chip: {th: "มีรับประกันไหม", en: "Warranty?", zh: "有保修吗"},
+      th: "มีครับ เงื่อนไขและระยะเวลารับประกันระบุในใบเสนอราคาของแต่ละงาน ส่วนอุปกรณ์รับประกันตามเงื่อนไขของผู้ผลิต และหลังส่งมอบเรายังรับแจ้งปัญหาและนัดตรวจเช็กให้ครับ",
+      en: "Yes. Warranty terms and duration are stated in each quotation; equipment follows the manufacturer's warranty. After handover we still take service calls and schedule check-ups.",
+      zh: "有。保修条件和期限在每份报价中注明，设备按厂家保修。交付后仍可报修并预约检查。",
+      a: ["form"]},
+    {id: "contact", k: ["ติดต่อ", "โทร", "เบอร์", "ไลน์", "line", "อีเมล", "คุยกับคน", "เจ้าหน้าที่", "contact", "phone", "call", "email", "联系", "电话"],
+      chip: {th: "ติดต่อทีมงาน", en: "Contact us", zh: "联系我们"},
+      th: "ติดต่อทีมงานได้เลยครับ\n📞 089-742-3332 หรือ 062-669-9544\n💬 LINE: @939plhhq\n✉️ kaewduangta555@gmail.com",
+      en: "Reach our team directly:\n📞 089-742-3332 or 062-669-9544\n💬 LINE: @939plhhq\n✉️ kaewduangta555@gmail.com",
+      zh: "直接联系我们的团队：\n📞 089-742-3332 或 062-669-9544\n💬 LINE：@939plhhq\n✉️ kaewduangta555@gmail.com",
+      a: ["tel", "line"]},
+    {id: "addr", k: ["ที่อยู่", "แผนที่", "ออฟฟิศ", "สำนักงาน", "บริษัทอยู่", "address", "office", "map", "地址", "办公室"],
+      chip: {th: "บริษัทอยู่ที่ไหน", en: "Where are you?", zh: "公司在哪里"},
+      th: "สำนักงานอยู่ที่ 48/402 หมู่ที่ 6 ถนนพุทธมณฑลสาย 4 ตำบลกระทุ่มล้ม อำเภอสามพราน จังหวัดนครปฐม 73220 ครับ",
+      en: "Our office: 48/402 Moo 6, Phutthamonthon Sai 4 Rd., Krathum Lom, Sam Phran, Nakhon Pathom 73220.",
+      zh: "办公室地址：佛统府三攀县 Krathum Lom 区 Phutthamonthon Sai 4 路 6 村 48/402 号，73220。",
+      a: ["map", "tel"]},
+    {id: "small", k: ["งานเล็ก", "งานบ้าน", "ซ่อมนิดหน่อย", "small job", "小工程"],
+      th: "รับครับ ทั้งงานบ้านพักอาศัย ร้านค้า สำนักงาน ไปจนถึงงานโรงงานและอาคารขนาดใหญ่",
+      en: "Yes, from homes, shops and offices up to factories and large buildings.",
+      zh: "接的，从住宅、商铺、办公室到工厂和大型建筑都可以。",
+      a: ["line", "tel"]},
+    {id: "company", k: ["จดทะเบียน", "นิติบุคคล", "บริษัทจริง", "น่าเชื่อถือ", "registered", "legit", "注册"],
+      th: "บริษัท เกษรถาวร จำกัด จดทะเบียนเมื่อ 17 กรกฎาคม 2563 เลขทะเบียนนิติบุคคล 0735563005252 ทุนจดทะเบียน 1,000,000 บาท ตรวจสอบได้ที่กรมพัฒนาธุรกิจการค้าครับ",
+      en: "Kesornthaworn Co., Ltd. was registered on 17 July 2020, registration no. 0735563005252, capital 1,000,000 THB, verifiable at the Department of Business Development.",
+      zh: "凯森塔瓦有限公司于 2020 年 7 月 17 日注册，注册号 0735563005252，注册资本 1,000,000 泰铢，可在商业发展厅查询。",
+      a: ["form"]},
+    {id: "review", k: ["รีวิว", "ให้คะแนน", "review", "评价"],
+      chip: {th: "เขียนรีวิว ⭐", en: "Leave a review ⭐", zh: "写评价 ⭐"},
+      th: "ขอบคุณมากครับ 🙏 รีวิวของคุณช่วยให้บริษัทเป็นที่รู้จักมากขึ้น กดปุ่มด้านล่างเพื่อให้คะแนนบน Google ได้เลย",
+      en: "Thank you 🙏 Your review helps others find us. Tap below to rate us on Google.",
+      zh: "非常感谢 🙏 您的评价能帮助更多人了解我们。点击下方在 Google 上评分。",
+      a: ["review"]},
+    {id: "hi", k: ["สวัสดี", "หวัดดี", "ดีครับ", "ดีค่ะ", "hello", "你好"],
+      th: "สวัสดีครับ 😊 อยากสอบถามเรื่องไหนดีครับ เลือกหัวข้อด้านล่างได้เลย",
+      en: "Hi there 😊 What would you like to know? Pick a topic below.",
+      zh: "您好 😊 想了解哪方面？请选择下方话题。"},
+    {id: "thanks", k: ["ขอบคุณ", "thank", "谢谢"],
+      th: "ยินดีครับ 🙏 ถ้าต้องการคุยกับทีมงานโดยตรง โทรหรือทัก LINE ได้ตลอดครับ",
+      en: "You're welcome 🙏 To talk to our team directly, call or message us on LINE.",
+      zh: "不客气 🙏 如需直接联系团队，请致电或 LINE 联系。",
+      a: ["tel", "line"]}
+  ];
+  const FALLBACK = {
+    th: "ขอโทษครับ ผู้ช่วยยังตอบคำถามนี้ไม่ได้ 🙏 ทีมงานตอบได้แน่นอน โทรหรือทัก LINE มาได้เลยครับ",
+    en: "Sorry, I can't answer that yet 🙏 Our team can — please call or message us on LINE.",
+    zh: "抱歉，暂时无法回答这个问题 🙏 我们的团队可以解答，请致电或 LINE 联系。"
+  };
+  const L = () => UI[LANG] ? LANG : "th";
+  const esc = s => s.replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+
+  document.body.insertAdjacentHTML("beforeend",
+    '<button class="bot-fab" type="button" aria-expanded="false" aria-controls="bot"><span class="dot"></span>' +
+    '<svg viewbox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"></path><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"></path></svg></button>' +
+    '<section class="bot" id="bot" role="dialog" aria-labelledby="bot-name" hidden>' +
+    '<div class="bot-head"><img alt="" src="/logo.png" width="34" height="39"/><div><b id="bot-name"></b><small></small></div><button class="bot-x" type="button">×</button></div>' +
+    '<div class="bot-log" aria-live="polite"></div><div class="bot-chips"></div>' +
+    '<form class="bot-in"><input autocomplete="off" maxlength="200" name="q"/><button type="submit"><svg viewbox="0 0 24 24"><path d="M3 20.5 21 12 3 3.5v6.6l12 1.9-12 1.9z"></path></svg></button></form></section>');
+  const fab = document.querySelector(".bot-fab"), box = document.getElementById("bot");
+  const log = box.querySelector(".bot-log"), chips = box.querySelector(".bot-chips"), fm = box.querySelector(".bot-in"), inp = fm.q;
+  let started = false, shownLang = null;
+
+  function say(text, who, acts){
+    const m = document.createElement("div"); m.className = "bot-msg " + who; m.textContent = text; log.append(m);
+    if (acts && acts.length) {
+      const r = document.createElement("div"); r.className = "bot-acts";
+      r.innerHTML = acts.map(k => { const x = A[k]; return '<a href="' + esc(x.href) + '"' + (x.cls ? ' class="' + x.cls + '"' : "") + (x.href[0] === "h" ? ' target="_blank" rel="noopener"' : "") + ">" + esc(x[L()]) + "</a>"; }).join("");
+      r.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", () => toggle(false)));
+      log.append(r);
+    }
+    log.scrollTop = log.scrollHeight;
+  }
+  function paint(){
+    const u = UI[L()]; shownLang = L();
+    box.querySelector("#bot-name").textContent = u.name; box.querySelector(".bot-head small").textContent = u.status;
+    fab.setAttribute("aria-label", u.open); box.querySelector(".bot-x").setAttribute("aria-label", u.close);
+    fm.querySelector("button").setAttribute("aria-label", u.send); inp.placeholder = u.ph; inp.setAttribute("aria-label", u.ph);
+    chips.innerHTML = T.filter(t => t.chip).map(t => '<button type="button" data-id="' + t.id + '">' + esc(t.chip[L()]) + "</button>").join("");
+    if (started && !log.querySelector(".bot-msg.u")) { log.innerHTML = ""; say(u.hi, "b"); }
+  }
+  function answer(t){ say(t[L()], "b", t.a); }
+  function match(q){
+    q = q.toLowerCase(); let best = null, score = 0;
+    T.forEach(t => { const s = t.k.reduce((n, k) => q.includes(k.toLowerCase()) ? n + k.length : n, 0); if (s > score) { score = s; best = t; } });
+    return best;
+  }
+  function toggle(open){
+    box.hidden = !open; fab.setAttribute("aria-expanded", open);
+    if (open) {
+      if (shownLang !== L()) paint();
+      if (!started) { started = true; say(UI[L()].hi, "b"); }
+      if (matchMedia("(min-width:701px)").matches) inp.focus();
+    } else fab.focus();
+  }
+  fab.addEventListener("click", () => toggle(box.hidden));
+  box.querySelector(".bot-x").addEventListener("click", () => toggle(false));
+  box.addEventListener("keydown", e => { if (e.key === "Escape") toggle(false); });
+  chips.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const t = T.find(x => x.id === b.dataset.id); say(b.textContent, "u"); setTimeout(() => answer(t), 250); });
+  fm.addEventListener("submit", e => {
+    e.preventDefault(); const q = inp.value.trim(); if (!q) return; inp.value = ""; say(q, "u");
+    const t = match(q); setTimeout(() => t ? answer(t) : say(FALLBACK[L()], "b", ["tel", "line"]), 300);
+  });
+  // เปลี่ยนภาษาที่หัวเว็บ ให้ผู้ช่วยเปลี่ยนตาม
+  new MutationObserver(() => { if (shownLang && shownLang !== L()) paint(); }).observe(document.documentElement, {attributes: true, attributeFilter: ["lang"]});
+  paint();
+})();
 </script>
 </body>
 </html>
